@@ -17,16 +17,18 @@ use Yii\Mutex\RedisMutex;
  * @group db
  * @group pgsql
  */
-class PgsqlMutexTest
+class RedisMutexTest
 {
     use MutexTestTrait;
+
+    protected static $mutexPrefix = 'prefix';
 
     /**
      * @return RedisMutex
      */
     protected function createMutex()
     {
-        return new RedisMutex($this->getConnection());
+        return new RedisMutex($this->getConnection(), self::$mutexPrefix);
     }
 
     private function getConnection()
