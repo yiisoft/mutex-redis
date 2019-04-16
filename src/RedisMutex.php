@@ -73,7 +73,7 @@ class RedisMutex extends Mutex
     private $lockValues = [];
 
 
-    public function __construct(Connection $connection, string $keyPrefix, $autoRelease = true)
+    public function __construct(Connection $connection, string $keyPrefix, bool $autoRelease = true)
     {
         parent::__construct($autoRelease);
         $this->connection = $connection;
@@ -87,7 +87,7 @@ class RedisMutex extends Mutex
      * return false immediately in case lock was already acquired.
      * @return bool lock acquiring result.
      */
-    protected function acquireLock($name, $timeout = 0)
+    protected function acquireLock(string $name, int $timeout = 0): bool
     {
         $key = $this->calculateKey($name);
         // FIXME
@@ -109,7 +109,7 @@ class RedisMutex extends Mutex
      * @param string $name of the lock to be released. This lock must already exist.
      * @return bool lock release result: `false` in case named lock was not found or Redis command failed.
      */
-    protected function releaseLock($name)
+    protected function releaseLock(string $name): bool
     {
         static $releaseLuaScript = <<<LUA
 if redis.call("GET",KEYS[1])==ARGV[1] then
@@ -136,7 +136,7 @@ LUA;
      * @param string $name mutex name.
      * @return string a safe cache key associated with the mutex name.
      */
-    protected function calculateKey($name)
+    protected function calculateKey(string $name): string
     {
         return $this->keyPrefix . md5(json_encode([__CLASS__, $name]));
     }
