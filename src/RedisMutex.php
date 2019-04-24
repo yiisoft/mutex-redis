@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace Yii\Mutex;
+namespace Yiisoft\Mutex;
 
 use yii\db\redis\Connection;
 use yii\helpers\Yii;
@@ -23,7 +23,7 @@ use yii\helpers\Yii;
  * ```php
  * [
  *     'mutex' => [
- *         '__class' => \Yii\Mutex\RedisMutex::class,
+ *         '__class' => \Yiisoft\Mutex\RedisMutex::class,
  *         'redis' => [
  *             'hostname' => 'localhost',
  *             'port' => 6379,
@@ -44,7 +44,7 @@ use yii\helpers\Yii;
  * ]
  * ```
  *
- * @see \Yii\Mutex\Mutex
+ * @see \Yiisoft\Mutex\Mutex
  * @see http://redis.io/topics/distlock
  *
  * @since 2.0.6
