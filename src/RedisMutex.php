@@ -7,7 +7,7 @@
 
 namespace Yiisoft\Mutex;
 
-use yii\db\redis\Connection;
+use Yiisoft\Db\Redis\Connection;
 use yii\helpers\Yii;
 
 /**
@@ -38,7 +38,7 @@ use yii\helpers\Yii;
  * ```php
  * [
  *     'mutex' => [
- *         'class' => \yii\db\redis\Mutex::class,
+ *         'class' => \Yiisoft\Db\Redis\Mutex::class,
  *         // 'redis' => 'redis' // id of the connection application component
  *     ],
  * ]
