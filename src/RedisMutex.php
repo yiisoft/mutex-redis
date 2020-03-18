@@ -7,8 +7,9 @@
 
 namespace Yiisoft\Mutex;
 
+use Exception;
 use Yiisoft\Db\Redis\Connection;
-use yii\helpers\Yii;
+use Yiisoft\Security\Random;
 
 /**
  * Redis Mutex implements a mutex component using [redis](http://redis.io/) as the storage medium.
@@ -86,12 +87,12 @@ class RedisMutex extends Mutex
      * @param int $timeout time (in seconds) to wait for lock to be released. Defaults to `0` meaning that method will
      * return false immediately in case lock was already acquired.
      * @return bool lock acquiring result.
+     * @throws Exception
      */
     protected function acquireLock(string $name, int $timeout = 0): bool
     {
         $key = $this->calculateKey($name);
-        // FIXME
-        $value = Yii::getApp()->security->generateRandomString(20);
+        $value = Random::string(20);
         $waitTime = 0;
         while (!$this->connection->executeCommand('SET', [$key, $value, 'NX', 'PX', (int) ($this->expire * 1000)])) {
             $waitTime++;
