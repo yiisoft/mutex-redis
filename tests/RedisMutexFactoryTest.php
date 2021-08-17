@@ -8,7 +8,7 @@ use Yiisoft\Mutex\MutexInterface;
 use Yiisoft\Mutex\Redis\RedisMutex;
 use Yiisoft\Mutex\Redis\RedisMutexFactory;
 
-final class PgsqlMutexFactoryTest extends TestCase
+final class RedisMutexFactoryTest extends TestCase
 {
     public function testCreateAndAcquire(): void
     {
