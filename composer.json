@@ -16,6 +16,16 @@
         "chat": "https://t.me/yii3en",
         "source": "https://github.com/yiisoft/mutex-db-redis"
     },
+    "funding": [
+        {
+            "type": "opencollective",
+            "url": "https://opencollective.com/yiisoft"
+        },
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/yiisoft"
+        }
+    ],
     "minimum-stability": "dev",
     "require": {
         "php": "^7.4|^8.0",
