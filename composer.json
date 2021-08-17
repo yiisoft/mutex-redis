@@ -29,7 +29,6 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^7.4|^8.0",
-        "ext-json": "*",
         "predis/predis": "^1.1",
         "yiisoft/mutex": "^3.0@dev",
         "yiisoft/security": "^1.0"
