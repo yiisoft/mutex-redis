@@ -26,11 +26,10 @@
             "url": "https://github.com/sponsors/yiisoft"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": "^7.4|^8.0",
         "predis/predis": "^1.1",
-        "yiisoft/mutex": "^3.0@dev",
+        "yiisoft/mutex": "^1.0",
         "yiisoft/security": "^1.0"
     },
     "require-dev": {
@@ -47,11 +46,6 @@
     "autoload-dev": {
         "psr-4": {
             "Yiisoft\\Mutex\\Redis\\Tests\\": "tests"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "3.0.x-dev"
         }
     },
     "config": {
