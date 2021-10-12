@@ -6,7 +6,7 @@ namespace Yiisoft\Mutex\Redis\Tests;
 
 use InvalidArgumentException;
 use ReflectionClass;
-use RuntimeException;
+use Yiisoft\Mutex\Exception\MutexReleaseException;
 use Yiisoft\Mutex\Redis\RedisMutex;
 
 use function microtime;
@@ -119,8 +119,8 @@ final class RedisMutexTest extends TestCase
         $expired->setValue($mutex, time() + 3600);
         $expired->setAccessible(false);
 
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage("Unable to release lock \"$mutexName\".");
+        $this->expectException(MutexReleaseException::class);
+        $this->expectExceptionMessage("Unable to release the \"$mutexName\" mutex.");
 
         $mutex->release();
     }
