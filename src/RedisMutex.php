@@ -6,7 +6,7 @@ namespace Yiisoft\Mutex\Redis;
 
 use InvalidArgumentException;
 use Predis\ClientInterface;
-use RuntimeException;
+use Yiisoft\Mutex\Exception\MutexReleaseException;
 use Yiisoft\Mutex\MutexInterface;
 use Yiisoft\Mutex\RetryAcquireTrait;
 use Yiisoft\Security\Random;
@@ -98,7 +98,7 @@ final class RedisMutex implements MutexInterface
         );
 
         if (!$released) {
-            throw new RuntimeException("Unable to release lock \"$this->mutexName\".");
+            throw new MutexReleaseException("Unable to release the \"$this->mutexName\" mutex.");
         }
 
         $this->expired = null;
