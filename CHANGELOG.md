@@ -1,6 +1,6 @@
 # Yii Redis Mutex Change Log
 
-## 1.1.0 under development
+## 1.1.0 October 19, 2021
 
 - Chg #34: Update the version of the `yiisoft/mutex` package to `1.1` in the `require` section of `composer.json` (devanych)
 
