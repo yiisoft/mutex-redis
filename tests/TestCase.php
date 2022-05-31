@@ -35,6 +35,8 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
     protected function isFreeLock(string $name): bool
     {
-        return $this->client()->exists(md5(RedisMutex::class . $name)) === 0;
+        return $this
+                ->client()
+                ->exists(md5(RedisMutex::class . $name)) === 0;
     }
 }
