@@ -20,8 +20,6 @@ use function time;
 final class RedisMutex implements MutexInterface
 {
     use RetryAcquireTrait;
-
-    private ClientInterface $client;
     private string $lockKey;
     private string $lockValue;
     private string $mutexName;
@@ -33,15 +31,13 @@ final class RedisMutex implements MutexInterface
      * @param ClientInterface $client Predis client instance to use.
      * @param int $ttl Number of seconds in which the lock will be auto released.
      */
-    public function __construct(string $name, ClientInterface $client, int $ttl = 30)
+    public function __construct(string $name, private ClientInterface $client, int $ttl = 30)
     {
         if ($ttl < 1) {
             throw new InvalidArgumentException(
                 "TTL must be a positive number greater than zero, \"$ttl\" is received.",
             );
         }
-
-        $this->client = $client;
         $this->lockKey = md5(self::class . $name);
         $this->lockValue = Random::string(20);
         $this->mutexName = $name;
