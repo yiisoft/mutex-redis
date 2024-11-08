@@ -28,7 +28,7 @@
     ],
     "require": {
         "php": "^7.4|^8.0",
-        "predis/predis": "^1.1",
+        "predis/predis": "^2.1",
         "yiisoft/mutex": "^1.1",
         "yiisoft/security": "^1.0"
     },
