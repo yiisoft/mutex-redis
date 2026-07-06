@@ -50,12 +50,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           persist-credentials: false
 
       - name: Start Redis v${{ matrix.redis }}
-        uses: superchargejs/redis-github-action@70df807fec7bc0f47643b7ade030ca547ca6b8a4
+        uses: superchargejs/redis-github-action@bc274cb7238cd63a45029db04ee48c07a72609fd
         with:
           redis-version: ${{ matrix.redis }}
 
@@ -70,10 +70,10 @@ jobs:
 
       - name: Determine composer cache directory on Linux
         if: matrix.os == 'ubuntu-latest'
-        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> "$GITHUB_ENV"
 
       - name: Cache dependencies installed with composer
-        uses: actions/cache@8492260343ad570701412c2f464a5877dc76bace
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
         with:
           path: ${{ env.COMPOSER_CACHE_DIR }}
           key: php${{ matrix.php }}-composer-${{ hashFiles('**/composer.json') }}
