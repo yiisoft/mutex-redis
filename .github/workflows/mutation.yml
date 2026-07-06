@@ -24,56 +24,11 @@ permissions:
 
 jobs:
   mutation:
-    name: PHP ${{ matrix.php }}-${{ matrix.os }}
-
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os:
-          - ubuntu-latest
-
-        php:
-          - 8.1
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
-        with:
-          persist-credentials: false
-
-      - name: Start Redis v6
-        uses: superchargejs/redis-github-action@bc274cb7238cd63a45029db04ee48c07a72609fd
-        with:
-          redis-version: 6
-
-      - name: Install PHP
-        uses: shivammathur/setup-php@b604ade2a87db23f8871b7182e69ec5e75effb45
-        with:
-          php-version: ${{ matrix.php }}
-          ini-values: memory_limit=-1
-          coverage: pcov
-          tools: composer:v2
-
-      - name: Determine composer cache directory
-        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> "$GITHUB_ENV"
-
-      - name: Cache dependencies installed with composer
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
-        with:
-          path: ${{ env.COMPOSER_CACHE_DIR }}
-          key: php${{ matrix.php }}-composer-${{ hashFiles('**/composer.json') }}
-          restore-keys: |
-            php${{ matrix.php }}-composer-
-
-      - name: Update composer
-        run: composer self-update
-
-      - name: Install dependencies with composer
-        run: composer update --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
-
-      - name: Run infection
-        run: |
-          vendor/bin/roave-infection-static-analysis-plugin -j2 --ignore-msi-with-no-mutations --only-covered
-        env:
-          STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
+    uses: yiisoft/actions/.github/workflows/roave-infection.yml@master
+    with:
+      ini-values: memory_limit=-1
+      os: '["ubuntu-latest"]'
+      php: '["8.1"]'
+      threads: '2'
+    secrets:
+      STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}

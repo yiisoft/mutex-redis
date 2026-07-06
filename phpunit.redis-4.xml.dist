@@ -14,7 +14,7 @@
 >
     <php>
         <ini name="error_reporting" value="-1"/>
-        <env name="REDIS_VERSION" value="6"/>
+        <env name="REDIS_VERSION" value="4"/>
     </php>
 
     <testsuites>
