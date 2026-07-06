@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+redis_version="${REDIS_VERSION:-6}"
+
+case "${redis_version}" in
+  4|5|6) ;;
+  *)
+    echo "Unsupported Redis version: ${redis_version}" >&2
+    exit 1
+    ;;
+esac
+
+if ! timeout 1 bash -c '</dev/tcp/127.0.0.1/6379' 2>/dev/null; then
+  docker run --rm --detach --publish 6379:6379 "redis:${redis_version}" >/dev/null
+
+  for _ in {1..60}; do
+    if timeout 1 bash -c '</dev/tcp/127.0.0.1/6379' 2>/dev/null; then
+      break
+    fi
+
+    sleep 0.5
+  done
+fi
+
+if ! timeout 1 bash -c '</dev/tcp/127.0.0.1/6379' 2>/dev/null; then
+  echo 'Redis did not become available on 127.0.0.1:6379.' >&2
+  exit 1
+fi
+
+exec vendor/bin/roave-infection-static-analysis-plugin "$@" --only-covered
