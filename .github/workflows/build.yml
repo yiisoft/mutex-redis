@@ -1,25 +1,16 @@
+name: build
+
 on:
   pull_request:
-    paths-ignore:
-      - 'docs/**'
-      - 'README.md'
-      - 'CHANGELOG.md'
-      - '.gitignore'
-      - '.gitattributes'
-      - 'infection.json.dist'
-      - 'psalm.xml'
-
+    paths: &paths
+      - 'src/**'
+      - 'tests/**'
+      - '.github/workflows/build.yml'
+      - 'composer.json'
+      - 'phpunit.*.dist'
   push:
-    paths-ignore:
-      - 'docs/**'
-      - 'README.md'
-      - 'CHANGELOG.md'
-      - '.gitignore'
-      - '.gitattributes'
-      - 'infection.json.dist'
-      - 'psalm.xml'
-
-name: build
+    branches: ['master']
+    paths: *paths
 
 permissions:
   contents: read
@@ -28,14 +19,14 @@ jobs:
   tests:
     name: Redis ${{ matrix.redis }}
     uses: yiisoft/actions/.github/workflows/phpunit.yml@master
-
     strategy:
       matrix:
         redis:
           - 4
           - 5
           - 6
-
+    secrets:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     with:
       os: '["ubuntu-latest"]'
       php: '["7.4", "8.0", "8.1"]'
