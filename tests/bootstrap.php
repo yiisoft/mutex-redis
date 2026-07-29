@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require dirname(__DIR__) . '/vendor/autoload.php';
+require \dirname(__DIR__) . '/vendor/autoload.php';
 
 if (getenv('GITHUB_ACTIONS') !== 'true' || yiiMutexRedisIsRedisAvailable()) {
     return;
@@ -14,7 +14,7 @@ if ($lock === false) {
     throw new RuntimeException('Unable to open Redis bootstrap lock.');
 }
 
-flock($lock, LOCK_EX);
+flock($lock, \LOCK_EX);
 
 try {
     if (!yiiMutexRedisIsRedisAvailable()) {
@@ -22,31 +22,31 @@ try {
         yiiMutexRedisWaitForRedis();
     }
 } finally {
-    flock($lock, LOCK_UN);
+    flock($lock, \LOCK_UN);
     fclose($lock);
 }
 
 function yiiMutexRedisStartRedis(string $version): void
 {
-    if (!in_array($version, ['4', '5', '6'], true)) {
+    if (!\in_array($version, ['4', '5', '6'], true)) {
         throw new RuntimeException("Unsupported Redis version \"$version\".");
     }
 
-    $command = sprintf(
+    $command = \sprintf(
         'docker run --rm --detach --publish 6379:6379 redis:%s',
-        escapeshellarg($version)
+        escapeshellarg($version),
     );
 
     exec($command, $output, $exitCode);
 
     if ($exitCode !== 0) {
         throw new RuntimeException(
-            sprintf(
+            \sprintf(
                 "Unable to start Redis %s.\nCommand: %s\nOutput:\n%s",
                 $version,
                 $command,
-                implode("\n", $output)
-            )
+                implode("\n", $output),
+            ),
         );
     }
 }
