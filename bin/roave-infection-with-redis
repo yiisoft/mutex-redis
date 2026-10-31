@@ -29,4 +29,4 @@ if ! timeout 1 bash -c '</dev/tcp/127.0.0.1/6379' 2>/dev/null; then
   exit 1
 fi
 
-exec vendor/bin/roave-infection-static-analysis-plugin "$@" --only-covered
+exec vendor/bin/infection "$@" --only-covered
