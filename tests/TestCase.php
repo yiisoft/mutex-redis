@@ -22,13 +22,11 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
     protected function client(): Client
     {
-        if ($this->client === null) {
-            $this->client = new Client([
-                'host' => '127.0.0.1',
-                'port' => 6379,
-                'prefix' => 'yiitest',
-            ]);
-        }
+        $this->client ??= new Client([
+            'host' => '127.0.0.1',
+            'port' => 6379,
+            'prefix' => 'yiitest',
+        ]);
 
         return $this->client;
     }
