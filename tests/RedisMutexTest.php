@@ -13,6 +13,8 @@ use function microtime;
 use function sleep;
 use function time;
 
+use const PHP_VERSION_ID;
+
 final class RedisMutexTest extends TestCase
 {
     public function testMutexAcquire(): void
