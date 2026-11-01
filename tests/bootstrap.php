@@ -33,7 +33,7 @@ function yiiMutexRedisStartRedis(string $version): void
     }
 
     $command = \sprintf(
-        'docker run --rm --detach --publish 6379:6379 redis:%s',
+        'docker run --rm --detach --publish 6379:6379 redis:%s 2>&1',
         escapeshellarg($version),
     );
 

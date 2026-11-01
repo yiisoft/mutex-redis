@@ -13,6 +13,8 @@ use function microtime;
 use function sleep;
 use function time;
 
+use const PHP_VERSION_ID;
+
 final class RedisMutexTest extends TestCase
 {
     public function testMutexAcquire(): void
@@ -115,9 +117,10 @@ final class RedisMutexTest extends TestCase
         $mutex = $this->createMutex($mutexName);
 
         $expired = (new ReflectionClass($mutex))->getProperty('expired');
-        $expired->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $expired->setAccessible(true);
+        }
         $expired->setValue($mutex, time() + 3600);
-        $expired->setAccessible(false);
 
         $this->expectException(MutexReleaseException::class);
         $this->expectExceptionMessage("Unable to release the \"$mutexName\" mutex.");
