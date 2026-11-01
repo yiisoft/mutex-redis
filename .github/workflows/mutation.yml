@@ -22,7 +22,7 @@ jobs:
     with:
       ini-values: memory_limit=-1
       os: '["ubuntu-latest"]'
-      php: '["8.1"]'
-      infection-args: --ignore-msi-with-no-mutations --only-covered --threads=1
+      php: '["8.5"]'
+      infection-args: --ignore-msi-with-no-mutations --threads=1
     secrets:
       STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
