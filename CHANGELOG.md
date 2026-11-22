@@ -3,6 +3,7 @@
 ## 1.1.1 under development
 
 - Chg #44: Bump `predis/predis` version to `^2.1` (@samdark)
+- Chg #74: Replace Psalm with PHPStan (@vjik)
 
 ## 1.1.0 October 19, 2021
 
