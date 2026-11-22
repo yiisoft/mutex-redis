@@ -4,6 +4,7 @@
 
 - Chg #44: Bump `predis/predis` version to `^2.1` (@samdark)
 - Chg #74: Replace Psalm with PHPStan (@vjik)
+- Chg #75: Change PHP constraint in `composer.json` to `7.4.* || 8.0 - 8.6` (@vjik)
 
 ## 1.1.0 October 19, 2021
 

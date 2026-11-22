@@ -17,7 +17,7 @@ This library provides a Redis mutex implementation for [yiisoft/mutex](https://g
 
 ## Requirements
 
-- PHP 7.4 or higher.
+- PHP 7.4 - 8.6.
 
 ## Installation
 

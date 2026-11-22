@@ -29,5 +29,6 @@ jobs:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     with:
       os: '["ubuntu-latest"]'
-      php: '["7.4", "8.0", "8.1"]'
+      php: >-
+        ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5', '8.6']
       phpunitConfig: phpunit.redis-${{ matrix.redis }}.xml.dist
