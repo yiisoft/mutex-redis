@@ -12,7 +12,6 @@
 [![Code Coverage](https://codecov.io/gh/yiisoft/mutex-redis/branch/master/graph/badge.svg)](https://codecov.io/gh/yiisoft/mutex-redis)
 [![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fyiisoft%2Fmutex-redis%2Fmaster)](https://dashboard.stryker-mutator.io/reports/github.com/yiisoft/mutex-redis/master)
 [![static analysis](https://github.com/yiisoft/mutex-redis/workflows/static%20analysis/badge.svg)](https://github.com/yiisoft/mutex-redis/actions?query=workflow%3A%22static+analysis%22)
-[![type-coverage](https://shepherd.dev/github/yiisoft/mutex-redis/coverage.svg)](https://shepherd.dev/github/yiisoft/mutex-redis)
 
 This library provides a Redis mutex implementation for [yiisoft/mutex](https://github.com/yiisoft/mutex).
 
